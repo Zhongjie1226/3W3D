@@ -1,0 +1,66 @@
+<div id="info">HW2
+
+    <script src="https://threejs.org/build/three.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+ 
+    <div  style="position:absolute; left:auto; top: 10px;  width:auto; height:auto;border-radius:10%;background-color:GREEN"> 
+            V<br>          
+            X<input type='text' id='X1' value='0' ><br><br>
+            Y<input type='text' id='X2' value='0'  ><br><br>
+            Z<input type='text' id='X3' value='0' ><br><br>
+    </div>
+    <div  style="position:absolute; left:auto; top: 250px;  width:auto; height:auto;border-radius:10%;background-color:GREEN">
+        <BR>
+            W<br>
+            X<input type='text' id='Y1' value='0'  ><br><br>
+            Y<input type='text' id='Y2' value='0' ><br><br>
+            Z<input type='text' id='Y3' value='0' ><br><br>
+        
+    </div>
+    <div style="position:absolute; left:auto; top:500px;  width:auto; height:auto;border-radius:10%;background-color:green">
+        
+         inner product 
+            v dot w<input type='text' id='VW' value='0'  ><br><br>   
+            v X w <br> (vector product) <br>
+            X<input type='text' id='XYX' value='0' ><br><br>
+            Y<input type='text' id='XYY' value='0' ><br><br>
+            Z<input type='text' id='XYZ' value='0' ><br><br>
+        </div>
+  <script>
+  var x=new THREE.Vector3();
+  var y=new THREE.Vector3();
+  var xy=new THREE.Vector3();
+  $('#X1').keyup( function() {
+        x.x = $(this).val();        
+        cal();
+    });
+  $('#X2').keyup( function() {
+        x.y = $(this).val();
+        cal();
+    });
+  $('#X3').keyup( function() {
+        x.z = $(this).val();
+        cal();
+    });
+  $('#Y1').keyup( function() {
+        y.x = $(this).val();
+        cal();
+    });
+  $('#Y2').keyup( function() {
+        y.y = $(this).val();
+        cal();
+    });
+  $('#Y3').keyup( function() {
+        y.z = $(this).val();
+        cal();
+    });
+    function cal(){
+        var xyd;
+        xyd=x.dot(y);
+        document.getElementById("VW").value = xyd;
+        xy.crossVectors(x,y);
+        document.getElementById("XYX").value =  xy.x;
+        document.getElementById("XYY").value =  xy.y;
+        document.getElementById("XYZ").value =  xy.z;
+    } 
+</script>

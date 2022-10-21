@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<style>
+
+body {
+  background-image: url('https://raw.githubusercontent.com/Zhongjie1226/W3D_hw/main/tree.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-position: center;
+  background-size: 50% 80%;
+}
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: hsl(120, 50%, 50%);
+  border-radius: 50%;
+  display: inline-block;
+}
+</style>
+</head>
+
+<body> 
+<CENTER><h1> Hw1 I4B06 佘仲傑</h1></CENTER>
+
+<div id='bkgd'></div>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<script>
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+class Lamp {
+
+  constructor(name) {
+    this.name = name + Lamp.id++;
+    this.myStatus = false;
+    this.change = false;
+    let el = document.createElement ('div');
+    el.id = this.name;
+    let text = document.createTextNode ('');
+    el.appendChild(text);
+    let bkgd = document.getElementById('bkgd');
+    bkgd.appendChild(el);
+    this.hue = 0;
+    this.Blind = 0;
+    this.sec = 500;
+    // styles
+    el.setAttribute ("style", `background-color: hsl(${this.hue}, 90%, 50%); height: 25px; width: 25px; border-radius: 50%;`);
+    this.left = Math.random()*0.8;
+    this.top = Math.random()*0.8;
+    el.style.position = "absolute";
+    el.style.left = (((this.left*100) % 11) + 45) + '%'; 
+    el.style.top = (((this.top*100) % 40) + 20) + '%';
+    $('#'+this.name).css('backgroundColor', `hsl(${this.hue},90%,24%)`);
+    //$('#'+this.name).text(this.name + ' is off');
+  }
+  flash(color) {
+    this.change = ! this.change;
+    
+    if (this.myStatus === true) {
+        this.hue = color;
+        $('#'+this.name).css('backgroundColor', `hsl(${color},90%,80%)`);
+        //$('#'+this.name).text(this.name + ' is on');
+    }else{
+        $('#'+this.name).css('backgroundColor', `hsl(${this.hue},90%,24%)`);
+        //$('#'+this.name).text(this.name + ' is off');
+    }
+  }
+  toggle() {
+    this.myStatus = ! this.myStatus;
+    if (this.myStatus === true) {
+      $('#'+this.name).css('backgroundColor', `hsl(${this.hue},90%,80%)`);
+      //$('#'+this.name).text(this.name + ' is on');
+    } else {
+      $('#'+this.name).css('backgroundColor', `hsl(${this.hue},90%,24%)`);
+      //$('#'+this.name).text(this.name + ' is off');
+    }
+  }
+
+  startBlink() {
+    var that = this;
+    that.blind = setInterval(function() {
+      that.flash(getRandomInt(360));
+    }, that.sec);
+    //clearInterval(that.blind);
+  }
+  stopBlink() {
+    var that = this;
+    clearInterval(that.blind);
+    that.blind = 0;
+    $('#'+this.name).css('backgroundColor', `hsl(${this.hue},90%,24%)`);
+  }
+}
+var amount = 10;
+var light = [];
+var BlinkId = [];
+var le = [40,50,60];
+var to = [20,40,60];
+Lamp.id = 0; // class variable
+for (let i = 0; i < amount ; i++) {
+   let ll = new Lamp ('light');
+   light.push(ll);
+   //ll.startBlink();
+}
+
+function hello() {
+   alert(1);
+}
+
+var isA = false;
+var isB = false;
+
+function aaa() {  
+   for (let i = 0; i < amount ; i++) {
+      light[i].myStatus = ! light[i].myStatus;
+      if(isB){
+          light[i].myStatus = ! light[i].myStatus;
+          light[i].stopBlink();
+          light[i].sec = 500;
+          light[i].startBlink();
+          isA = true;
+      }
+      else if(light[i].myStatus){
+          light[i].sec = 500;
+          light[i].startBlink();
+          isA = true;
+      }else{
+          light[i].stopBlink();
+          isA = false;
+      }
+   }
+   
+   isB = false;
+   return;
+}
+function bbb() {
+   var seconds = getRandomInt(1000) + 1000;
+   
+   for (let i = 0; i < amount ; i++) {
+      light[i].myStatus = ! light[i].myStatus;
+      if(isA){
+          light[i].myStatus = ! light[i].myStatus;
+          light[i].stopBlink();
+          light[i].sec = seconds;
+          light[i].startBlink();
+          isB = true;
+      }
+      else if(light[i].myStatus){
+          
+          light[i].sec = seconds;
+          light[i].startBlink();
+          isB = true;
+      }else{
+          light[i].stopBlink();
+          isB = false;
+      }
+   }
+   isA = false;
+   
+   return;
+}
+
+
+</script>
+<<<<<<<< HEAD:hw1/index.html
+
+<CENTER> <button onclick="aaa()">0.5 seconds</button>  <button onclick="bbb()">Random</button></CENTER>
+========
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<CENTER> <button onclick="aaa()">閃爍</button>  <button onclick="bbb()">隨機</button></CENTER>
+>>>>>>>> 591ab042b14cd4dec679f3440a9708c4465aee60:index.html
+
+
+
+</body>
+
+</html>
